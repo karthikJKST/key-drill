@@ -1,0 +1,297 @@
+/* practice.css — score bar, progress bar, typing card, keyboard, finger guide */
+
+.practice {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ---------- score bar ---------- */
+
+.scorebar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  gap: 10px;
+}
+
+.clock,
+.statbox {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 6px 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--card);
+  box-shadow: var(--shadow);
+}
+
+.clock {
+  min-width: 100px;
+}
+
+.statbox {
+  min-width: 76px;
+}
+
+.clock__label,
+.statbox__label {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.clock__value {
+  font-size: 26px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 1px;
+  line-height: 1.2;
+}
+
+.statbox__value {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.scorebar__end {
+  margin-left: auto;
+  align-self: center;
+}
+
+/* ---------- session progress bar ---------- */
+
+.progress {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.progress__head {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.progress__value {
+  color: var(--text);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.progress__track {
+  height: 8px;
+  background: var(--border);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress__fill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+
+/* ---------- typing card ---------- */
+
+.typing {
+  display: flex;
+  gap: 18px;
+  align-items: stretch;
+}
+
+.nextkey {
+  flex: 0 0 130px;
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 14px 8px;
+  text-align: center;
+}
+
+.nextkey--ok {
+  border-color: var(--ok);
+}
+
+.nextkey--bad {
+  border-color: var(--bad);
+}
+
+.nextkey__label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+}
+
+.nextkey__key {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 46px;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.nextkey__finger {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.typing__body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* the text to type: groups of 4, separated by a CSS gap only */
+.drillline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: clamp(19px, 4vw, 24px);
+  letter-spacing: 2px;
+  line-height: 1.6;
+}
+
+.drill {
+  white-space: nowrap;
+}
+
+.drill__char--done {
+  color: var(--muted);
+}
+
+.drill__char--next {
+  background: var(--accent-weak);
+  color: var(--accent);
+  font-weight: 700;
+  border-radius: 4px;
+  padding: 0 4px;
+}
+
+/* the key that was just missed flashes red for a moment */
+.drill__char--missed {
+  color: var(--bad);
+  font-weight: 700;
+}
+
+.typebox {
+  width: 100%;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 16px;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.typebox:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-weak);
+}
+
+/* brief error indication after a wrong key (must win over :focus) */
+.typebox.typebox--bad {
+  border-color: var(--bad);
+  box-shadow: 0 0 0 3px rgba(192, 57, 43, 0.15);
+}
+
+.typebox::placeholder {
+  color: var(--muted);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* fixed height so a hint appearing does not make the card jump */
+.hint {
+  margin: 0;
+  min-height: 18px;
+  font-size: 13px;
+  color: var(--bad);
+}
+
+/* ---------- keyboard + finger guide ---------- */
+
+.guide {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.guide__label {
+  margin: 0 0 10px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+/* key sizes shrink with the screen so 8 keys always fit one row */
+.keyboard {
+  --key-size: clamp(26px, 7vw, 56px);
+  display: flex;
+  justify-content: center;
+  flex-wrap: nowrap;
+  gap: clamp(3px, 1vw, 8px);
+}
+
+.keycap {
+  width: var(--key-size);
+  height: var(--key-size);
+  border: 1px solid var(--border);
+  border-bottom-width: 3px;
+  border-radius: 8px;
+  background: var(--bg);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: clamp(12px, 2.2vw, 20px);
+  font-weight: 600;
+}
+
+/* extra space in the middle = the gap between the two hands */
+.keycap--spaced {
+  margin-left: clamp(8px, 2vw, 26px);
+}
+
+.keycap--active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #ffffff;
+}
+
+/* ---------- small screens ---------- */
+
+@media (max-width: 640px) {
+  .typing {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .nextkey {
+    flex: none;
+    flex-direction: row;
+    justify-content: center;
+    gap: 12px;
+    padding: 10px;
+  }
+
+  .nextkey__key {
+    font-size: 32px;
+  }
+
+  .scorebar__end {
+    margin-left: 0;
+    width: 100%;
+  }
+}
