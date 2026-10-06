@@ -46,7 +46,7 @@ export default function App() {
       </main>
 
       <footer className="app__footer">
-        KeyDrill — a small project built while learning React.
+        KeyDrill — home-row typing practice.
       </footer>
     </div>
   )
